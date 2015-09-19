@@ -189,6 +189,7 @@ final class Middleware
                     function ($response) use ($logger, $request, $formatter, $logLevel) {
                         $message = $formatter->format($request, $response);
                         $logger->log($logLevel, $message);
+                        $response->getBody()->rewind();
                         return $response;
                     },
                     function ($reason) use ($logger, $request, $formatter) {
